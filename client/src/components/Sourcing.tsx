@@ -19,6 +19,15 @@ export default function Sourcing(): JSX.Element {
           being 100% slave-trade free and supporting sustainable agriculture in
           the communities we work with.
         </p>
+        <h2 id="sustainability">Our Sustainability</h2>
+        <p>
+          Sustainability for us starts in the orchards and fields. We partner
+          with growers that practice regenerative agriculture—crop rotation,
+          water-efficient irrigation, minimal chemical inputs, and soil health
+          monitoring—so every shipment supports long-term productivity rather
+          than exhausting the land. Our farmers also chose to use packaging 
+          specs which prioritize recyclable materials.
+        </p>
       </div>
     </section>
   );

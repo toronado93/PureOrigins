@@ -59,24 +59,7 @@ export default function Footer(): JSX.Element {
             </a>
           </div>
         </div>
-        <div className="footer__nav">
-          <p className="footer__label">Explore</p>
-          <ul>
-            <li>
-              <a href="#what">Products</a>
-            </li>
-            <li>
-              <a href="#services">Services</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-          </ul>
-        </div>
-        <div className="footer__contact">
+        <div className="footer__contact" id="contact">
           <p className="footer__label">Contact</p>
           <ul>
             <li>
@@ -107,7 +90,6 @@ export default function Footer(): JSX.Element {
               alerts curated by our sourcing team.
             </p>
           </div>
-
           <form className="footer__form">
             <label className="sr-only" htmlFor="newsletter-email">
               Email address
@@ -125,14 +107,26 @@ export default function Footer(): JSX.Element {
       </div>
       <div className="footer__bottom">
         <div className="container footer__bottom-inner">
+          <div className="footer__nav">
+            <a href="#sourcing">Sourcing</a>
+            <span aria-hidden="true"> • </span>
+            <a href="#sustainability">Sustainability</a>
+            <span aria-hidden="true"> • </span>
+            <a href="#about">About</a>
+            <span aria-hidden="true"> • </span>
+            <a href="#offer">Our Produce</a>
+            <span aria-hidden="true"> • </span>
+            <a href="#contact">Contact</a>
+          </div>
           <span>
             © {new Date().getFullYear()} PureOrigins. All rights reserved.
           </span>
-          <div className="footer__policies">
+          {/* I didn't think this was necessary */}
+          {/*<div className="footer__policies">
             <a href="#privacy">Privacy</a>
             <span aria-hidden="true">•</span>
             <a href="#terms">Terms</a>
-          </div>
+          </div>*/}
         </div>
       </div>
     </footer>

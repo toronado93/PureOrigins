@@ -21,6 +21,8 @@ export default function Navbar(): JSX.Element {
     .filter(Boolean)
     .join(" ");
 
+  const handleNavClick = () => setOpen(false);
+
   return (
     <nav className={navClassName}>
       <div className="nav-container large">
@@ -44,19 +46,29 @@ export default function Navbar(): JSX.Element {
 
         <ul className={`nav-links ${open ? "open" : ""}`}>
           <li>
-            <a href="#what">Sourcing</a>
+            <a href="#sourcing" onClick={handleNavClick}>
+              Sourcing
+            </a>
           </li>
           <li>
-            <a href="#services">Sustainability</a>
+            <a href="#sustainability" onClick={handleNavClick}>
+              Sustainability
+            </a>
           </li>
           <li>
-            <a href="#about">About</a>
+            <a href="#about" onClick={handleNavClick}>
+              About
+            </a>
           </li>
           <li>
-            <a href="#contact">Our Produce</a>
+            <a href="#offer" onClick={handleNavClick}>
+              Our Produce
+            </a>
           </li>
           <li>
-            <a href="#contact">Contact</a>
+            <a href="#contact" onClick={handleNavClick}>
+              Contact
+            </a>
           </li>
         </ul>
       </div>
