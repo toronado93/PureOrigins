@@ -3,6 +3,7 @@ import HeroSlider from "./components/HeroSlider";
 import About from "./components/About";
 import Sourcing from "./components/Sourcing";
 import Offer from "./components/Offer";
+import Footer from "./components/Footer";
 
 type Product = {
   id: number;
@@ -136,11 +137,7 @@ export default function App(): JSX.Element {
         </section>
       </main> */}
 
-      <footer className="footer">
-        <div className="container">
-          © PureOrigins — Built for B2B produce buyers
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
