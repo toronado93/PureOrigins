@@ -100,11 +100,14 @@ export default function Footer(): JSX.Element {
           </ul>
         </div>
         <div className="footer__cta">
-          <p className="footer__label">Stay in the loop</p>
-          <p>
-            Sign up for seasonal market updates and harvest availability alerts
-            curated by our sourcing team.
-          </p>
+          <div>
+            <p className="footer__label">Stay in the loop</p>
+            <p>
+              Sign up for seasonal market updates and harvest availability
+              alerts curated by our sourcing team.
+            </p>
+          </div>
+
           <form className="footer__form">
             <label className="sr-only" htmlFor="newsletter-email">
               Email address
@@ -122,7 +125,9 @@ export default function Footer(): JSX.Element {
       </div>
       <div className="footer__bottom">
         <div className="container footer__bottom-inner">
-          <span>© {new Date().getFullYear()} PureOrigins. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} PureOrigins. All rights reserved.
+          </span>
           <div className="footer__policies">
             <a href="#privacy">Privacy</a>
             <span aria-hidden="true">•</span>
