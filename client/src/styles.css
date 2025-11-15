@@ -669,8 +669,14 @@ a:hover {
   width: 100%;
 }
 .nav-overlay {
-  background: transparent;
-  border-bottom: 1px solid transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(245, 238, 228, 0.96) 0%,
+    rgba(245, 238, 228, 0.58) 55%,
+    rgba(245, 238, 228, 0) 100%
+  );
+  backdrop-filter: blur(10px);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.42); */
   transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
