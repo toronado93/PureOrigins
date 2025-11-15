@@ -11,7 +11,7 @@ All contents of this repository are proprietary to PureOrigins Ltd (registration
 - Any contributions, suggestions, or feedback submitted to this repository become the sole property of PureOrigins Ltd, unless a separate written agreement states otherwise.
 - Unauthorized access or use will be pursued to the fullest extent permitted by law.
 
-If you require permission to reference or use any material contained in this repository, please contact ownership@pureorigins.co.uk. Written authorization is mandatory before any use is made of the assets.
+If you require permission to reference or use any material contained in this repository, please contact PureOriginsltd+ownership@gmail.com. Written authorization is mandatory before any use is made of the assets.
 
 ## Internal Use Only
 This codebase is intended solely for internal PureOrigins development activities. Contractors, employees, and partners must adhere to all confidentiality agreements and ensure adequate safeguards are in place when handling repository contents. Do not share or publicly disclose any part of this project.
