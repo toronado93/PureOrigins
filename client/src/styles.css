@@ -73,20 +73,23 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
+}
+
+@media (max-width: 720px) {
   .logo {
-    height: 38px;
-    max-width: 140px;
-    width: auto;
-    display: block;
-    object-fit: contain;
-  }
-  @media (max-width: 720px) {
-    .logo {
-      height: 32px;
-      max-width: 110px;
-    }
+    height: 50px !important;
+    max-width: 110px !important;
   }
 }
+/* 
+.logo {
+  height: 138px;
+  max-width: 140px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+} */
+
 .card {
   padding: 1.4rem;
   border-radius: 18px;

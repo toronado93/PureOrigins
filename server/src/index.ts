@@ -26,7 +26,7 @@ app.get('*', (req, res) => {
   if (fs.existsSync(indexHtml)) {
     res.sendFile(indexHtml)
   } else {
-    res.json({ message: 'VegBiz server running. Build the client and place files in server/public to serve them.' })
+    res.json({ message: 'PureOrigins server running. Build the client and place files in server/public to serve them.' })
   }
 })
 
