@@ -1,6 +1,6 @@
 export default function About(): JSX.Element {
   return (
-    <section className="about-section" id="story">
+    <section className="about-section" id="about">
       <div className="about-card">
         <h3>Our Motto</h3>
         <p>
