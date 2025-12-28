@@ -4,9 +4,9 @@ export default function Footer(): JSX.Element {
       <div className="container footer__inner">
         <div className="footer__brand">
           <span className="footer__mark">PureOrigins</span>
-          <p>
+          <p style={{ color: "black", opacity: 0.8 }}>
             Sourcing regenerative produce at scale with full transparency,
-            consistent specs, and logistics tuned for wholesale buyers.
+            consistent specs, and logistics tuned for your needs.
           </p>
           <div className="footer__social" aria-label="Social media">
             <a
@@ -60,37 +60,63 @@ export default function Footer(): JSX.Element {
           </div>
         </div>
         <div className="footer__contact" id="contact">
-          <p className="footer__label">Contact</p>
-          <ul>
+          <span className="footer__mark">Contact</span>
+          <ul style={{ paddingTop: "10%"}}>
             <li>
               <span className="footer__contact-icon" aria-hidden="true">
                 📍
               </span>
-              <span>1200 Greenway Ave, Suite 400, Salinas, CA</span>
+              <span style={{ color: "black", opacity: 0.8 }}>London / UK</span>
+            </li>
+            <li>
+              <span className="footer__contact-icon" aria-hidden="true">
+                📍
+              </span>
+              <span style={{ color: "black", opacity: 0.8 }}>Cairo / Egypt</span>
             </li>
             <li>
               <span className="footer__contact-icon" aria-hidden="true">
                 ✉️
               </span>
-              <a href="mailto:sales@pureorigins.ag">sales@pureorigins.ag</a>
+              <a href="mailto:pureorigins+sales@gmail.com">pureorigins@gmail.com</a>
             </li>
             <li>
               <span className="footer__contact-icon" aria-hidden="true">
                 📞
               </span>
-              <a href="tel:+15551234567">+1 (555) 123-4567</a>
+              <a href="tel:+447518549847">+447518549847</a>
             </li>
           </ul>
         </div>
         <div className="footer__cta">
           <div>
-            <p className="footer__label">Stay in the loop</p>
-            <p>
-              Sign up for seasonal market updates and harvest availability
-              alerts curated by our sourcing team.
+            <p className="footer__label">Get in touch now</p>
+            <p style={{ color: "black", opacity: 0.8 }}>
+              Have a question or need a quote?
+              Fill out the form and we’ll get back to you quickly.
             </p>
           </div>
           <form className="footer__form">
+            <label className="sr-only" htmlFor="contact-name">
+              Full name
+            </label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              placeholder="Your name"
+              required
+            />
+            <label className="sr-only" htmlFor="contact-phone">
+              Phone number
+            </label>
+            <input
+              type="tel"
+              id="contact-phone"
+              name="phone"
+              placeholder="Phone number"
+              required
+            />
             <label className="sr-only" htmlFor="newsletter-email">
               Email address
             </label>
@@ -98,7 +124,7 @@ export default function Footer(): JSX.Element {
               type="email"
               id="newsletter-email"
               name="email"
-              placeholder="Enter your email"
+              placeholder="Email address"
               required
             />
             <button type="submit">Notify me</button>

@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from "react";
+import apricotsImg from "../assets/Apricots.png";
+import avocadosImg from "../assets/Avocados.png";
+import artichokesImg from "../assets/Artichokes.png";
+import strawberriesImg from "../assets/Farm_strawbs.jpg";
+import mulberriesImg from "../assets/Mulberries.png";
+import plumsImg from "../assets/Plums.jpg";
 
-// Professional sample images (Unsplash). Replace with your own high-res photos.
 const slides = [
   {
-    src: "https://images.unsplash.com/photo-1416453072034-c8dbfa2856b5?auto=format&fit=crop&w=1600&q=80",
-    alt: "Vine tomatoes stacked at the market",
+    src: apricotsImg,
+    alt: "Farm Fresh Apricots",
   },
   {
-    src: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80",
-    alt: "Fresh lettuce heads",
+    src: avocadosImg,
+    alt: "Ripe and Ready Avocados",
   },
   {
-    src: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1200&q=80",
-    alt: "Bunches of carrots",
+    src: artichokesImg,
+    alt: "Succulent Artichokes",
   },
   {
-    src: "https://images.unsplash.com/photo-1447175008436-054170c2e979?auto=format&fit=crop&w=1600&q=80",
-    alt: "Potatoes in bulk",
+    src: strawberriesImg,
+    alt: "Juicy Sweet Strawberries",
   },
   {
-    src: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=1200&q=80",
-    alt: "Colorful peppers",
+    src: mulberriesImg,
+    alt: "Premium Mulberries",
+  },
+  {
+    src: plumsImg,
+    alt: "Plums and More",
   },
 ];
 
@@ -49,7 +58,7 @@ export default function HeroSlider(): JSX.Element {
             <img src={s.src} alt={s.alt} />
             <div className="slide-caption">
               <h2>{s.alt}</h2>
-              <p>PureOrigins — reliable supply for retailers & wholesalers</p>
+              <p style={{ color: "white" }}>PureOrigins — reliable supply for retailers & wholesalers</p>
             </div>
           </div>
         ))}
