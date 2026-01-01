@@ -27,11 +27,13 @@ export default function Navbar(): JSX.Element {
     <nav className={navClassName}>
       <div className="nav-container large">
         <div className="brand">
-          <img
-            src={logo}
-            alt="PureOrigins logo"
-            className={`logo${scrolled ? " logo-solid" : ""}`}
-          />
+          <a href="main">
+            <img
+              src={logo}
+              alt="PureOrigins logo"
+              className={`logo${scrolled ? " logo-solid" : ""}`}
+            />
+          </a>
         </div>
 
         <button

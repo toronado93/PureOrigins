@@ -1,4 +1,48 @@
+import { useState } from "react";
+
 export default function Footer(): JSX.Element {
+  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const name = form.name.trim();
+    const phone = form.phone.trim();
+    const email = form.email.trim();
+
+    if (!name || !phone || !email) {
+      setError("Please fill in your name, phone number, and email.");
+      return;
+    }
+
+    const emailValid = /\S+@\S+\.\S+/.test(email);
+    const phoneValid = phone.replace(/[^\d+]/g, "").length >= 7;
+
+    if (!emailValid) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!phoneValid) {
+      setError("Please enter a valid phone number.");
+      return;
+    }
+
+    setError(null);
+    const subject = encodeURIComponent("PureOrigins contact request");
+    const body = encodeURIComponent(
+      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}`
+    );
+
+    if (typeof window !== "undefined") {
+      window.location.href = `mailto:pureorigins@gmail.com?subject=${subject}&body=${body}`;
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="container footer__inner">
@@ -61,7 +105,7 @@ export default function Footer(): JSX.Element {
         </div>
         <div className="footer__contact" id="contact">
           <span className="footer__mark">Contact</span>
-          <ul style={{ paddingTop: "10%"}}>
+          <ul style={{ paddingTop: "10%" }}>
             <li>
               <span className="footer__contact-icon" aria-hidden="true">
                 📍
@@ -78,7 +122,9 @@ export default function Footer(): JSX.Element {
               <span className="footer__contact-icon" aria-hidden="true">
                 ✉️
               </span>
-              <a href="mailto:pureorigins+sales@gmail.com">pureorigins@gmail.com</a>
+              <a href="mailto:pureorigins+sales@gmail.com">
+                pureorigins@gmail.com
+              </a>
             </li>
             <li>
               <span className="footer__contact-icon" aria-hidden="true">
@@ -92,11 +138,11 @@ export default function Footer(): JSX.Element {
           <div>
             <p className="footer__label">Get in touch now</p>
             <p style={{ color: "black", opacity: 0.8 }}>
-              Have a question or need a quote?
-              Fill out the form and we’ll get back to you quickly.
+              Have a question or need a quote? Fill out the form and we&apos;ll
+              get back to you quickly.
             </p>
           </div>
-          <form className="footer__form">
+          <form className="footer__form" onSubmit={handleSubmit}>
             <label className="sr-only" htmlFor="contact-name">
               Full name
             </label>
@@ -106,6 +152,8 @@ export default function Footer(): JSX.Element {
               name="name"
               placeholder="Your name"
               required
+              value={form.name}
+              onChange={handleChange}
             />
             <label className="sr-only" htmlFor="contact-phone">
               Phone number
@@ -116,6 +164,8 @@ export default function Footer(): JSX.Element {
               name="phone"
               placeholder="Phone number"
               required
+              value={form.phone}
+              onChange={handleChange}
             />
             <label className="sr-only" htmlFor="newsletter-email">
               Email address
@@ -126,7 +176,10 @@ export default function Footer(): JSX.Element {
               name="email"
               placeholder="Email address"
               required
+              value={form.email}
+              onChange={handleChange}
             />
+            {error ? <p className="form-error">{error}</p> : null}
             <button type="submit">Notify me</button>
           </form>
         </div>
