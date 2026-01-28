@@ -55,7 +55,7 @@ export default function Footer(): JSX.Element {
           <div className="footer__social" aria-label="Social media">
             <a
               className="footer__social-link"
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/in/daniel-mosaid-70467761/"
               target="_blank"
               rel="noreferrer"
               aria-label="PureOrigins on LinkedIn"
@@ -71,7 +71,7 @@ export default function Footer(): JSX.Element {
             </a>
             <a
               className="footer__social-link"
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/pureoriginsfresh/"
               target="_blank"
               rel="noreferrer"
               aria-label="PureOrigins on Instagram"
@@ -85,7 +85,7 @@ export default function Footer(): JSX.Element {
                 <path d="M7 3c-2.2 0-4 1.8-4 4v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4H7zm10 2c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h10zm-5 3.5A4.5 4.5 0 1 0 16.5 13 4.5 4.5 0 0 0 12 8.5zm0 2A2.5 2.5 0 1 1 9.5 13 2.5 2.5 0 0 1 12 10.5zm4.75-3.75a.75.75 0 1 0 .75.75.75.75 0 0 0-.75-.75z" />
               </svg>
             </a>
-            <a
+            {/* <a
               className="footer__social-link"
               href="https://twitter.com"
               target="_blank"
@@ -100,7 +100,7 @@ export default function Footer(): JSX.Element {
               >
                 <path d="M18.36 3H21l-6.58 7.51L21.65 21H16l-4.02-5.26L7.28 21H3l6.83-7.78L3.35 3H9l3.63 4.81L18.36 3zm-1.8 15h1.49L8.42 5.97H6.8L16.56 18z" />
               </svg>
-            </a>
+            </a> */}
           </div>
         </div>
         <div className="footer__contact" id="contact">
