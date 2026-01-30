@@ -1,17 +1,26 @@
 import { useState } from "react";
 
 export default function Footer(): JSX.Element {
-  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    phone: "",
+    email: "",
+  });
   const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     const name = form.name.trim();
+    const company = form.company.trim();
     const phone = form.phone.trim();
     const email = form.email.trim();
 
@@ -33,13 +42,31 @@ export default function Footer(): JSX.Element {
     }
 
     setError(null);
-    const subject = encodeURIComponent("PureOrigins contact request");
-    const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}`
-    );
+    setStatus("sending");
 
-    if (typeof window !== "undefined") {
-      window.location.href = `mailto:pureorigins@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, company, phone, email }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(
+          typeof data?.error === "string"
+            ? data.error
+            : "Something went wrong. Please try again."
+        );
+      }
+
+      setStatus("success");
+      setForm({ name: "", company: "", phone: "", email: "" });
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Unable to send request.";
+      setStatus("idle");
+      setError(message);
     }
   };
 
@@ -144,7 +171,7 @@ export default function Footer(): JSX.Element {
           </div>
           <form className="footer__form" onSubmit={handleSubmit}>
             <label className="sr-only" htmlFor="contact-name">
-              Full name
+              Your name
             </label>
             <input
               type="text"
@@ -153,6 +180,17 @@ export default function Footer(): JSX.Element {
               placeholder="Your name"
               required
               value={form.name}
+              onChange={handleChange}
+            />
+            <label className="sr-only" htmlFor="contact-company">
+              Company name (optional)
+            </label>
+            <input
+              type="text"
+              id="contact-company"
+              name="company"
+              placeholder="Company name (optional)"
+              value={form.company}
               onChange={handleChange}
             />
             <label className="sr-only" htmlFor="contact-phone">
@@ -180,7 +218,14 @@ export default function Footer(): JSX.Element {
               onChange={handleChange}
             />
             {error ? <p className="form-error">{error}</p> : null}
-            <button type="submit">Notify me</button>
+            {status === "success" ? (
+              <p className="form-success" style={{ color: "#1f5e3b" }}>
+                Thanks! We will be in touch shortly.
+              </p>
+            ) : null}
+            <button type="submit" disabled={status === "sending"}>
+              {status === "sending" ? "Sending..." : "Notify me"}
+            </button>
           </form>
         </div>
       </div>
