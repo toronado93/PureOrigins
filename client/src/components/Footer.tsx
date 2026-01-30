@@ -3,13 +3,16 @@ import { useState } from "react";
 export default function Footer(): JSX.Element {
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     const name = form.name.trim();
     const phone = form.phone.trim();
@@ -33,13 +36,31 @@ export default function Footer(): JSX.Element {
     }
 
     setError(null);
-    const subject = encodeURIComponent("PureOrigins contact request");
-    const body = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}`
-    );
+    setStatus("sending");
 
-    if (typeof window !== "undefined") {
-      window.location.href = `mailto:pureorigins@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, email }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(
+          typeof data?.error === "string"
+            ? data.error
+            : "Something went wrong. Please try again."
+        );
+      }
+
+      setStatus("success");
+      setForm({ name: "", phone: "", email: "" });
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Unable to send request.";
+      setStatus("idle");
+      setError(message);
     }
   };
 
@@ -180,7 +201,14 @@ export default function Footer(): JSX.Element {
               onChange={handleChange}
             />
             {error ? <p className="form-error">{error}</p> : null}
-            <button type="submit">Notify me</button>
+            {status === "success" ? (
+              <p className="form-success" style={{ color: "#1f5e3b" }}>
+                Thanks! We will be in touch shortly.
+              </p>
+            ) : null}
+            <button type="submit" disabled={status === "sending"}>
+              {status === "sending" ? "Sending..." : "Notify me"}
+            </button>
           </form>
         </div>
       </div>
