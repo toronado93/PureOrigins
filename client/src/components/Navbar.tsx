@@ -27,7 +27,7 @@ export default function Navbar(): JSX.Element {
     <nav className={navClassName}>
       <div className="nav-container large">
         <div className="brand">
-          <a href="main">
+          <a href="/">
             <img
               src={logo}
               alt="PureOrigins logo"
