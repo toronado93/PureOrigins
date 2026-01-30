@@ -1,7 +1,12 @@
 import { useState } from "react";
 
 export default function Footer(): JSX.Element {
-  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    phone: "",
+    email: "",
+  });
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
 
@@ -15,6 +20,7 @@ export default function Footer(): JSX.Element {
   ): Promise<void> => {
     e.preventDefault();
     const name = form.name.trim();
+    const company = form.company.trim();
     const phone = form.phone.trim();
     const email = form.email.trim();
 
@@ -42,7 +48,7 @@ export default function Footer(): JSX.Element {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email }),
+        body: JSON.stringify({ name, company, phone, email }),
       });
 
       if (!response.ok) {
@@ -55,7 +61,7 @@ export default function Footer(): JSX.Element {
       }
 
       setStatus("success");
-      setForm({ name: "", phone: "", email: "" });
+      setForm({ name: "", company: "", phone: "", email: "" });
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Unable to send request.";
@@ -165,7 +171,7 @@ export default function Footer(): JSX.Element {
           </div>
           <form className="footer__form" onSubmit={handleSubmit}>
             <label className="sr-only" htmlFor="contact-name">
-              Full name
+              Your name
             </label>
             <input
               type="text"
@@ -174,6 +180,17 @@ export default function Footer(): JSX.Element {
               placeholder="Your name"
               required
               value={form.name}
+              onChange={handleChange}
+            />
+            <label className="sr-only" htmlFor="contact-company">
+              Company name (optional)
+            </label>
+            <input
+              type="text"
+              id="contact-company"
+              name="company"
+              placeholder="Company name (optional)"
+              value={form.company}
               onChange={handleChange}
             />
             <label className="sr-only" htmlFor="contact-phone">
