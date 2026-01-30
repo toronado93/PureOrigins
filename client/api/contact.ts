@@ -1,8 +1,9 @@
-import { Resend } from "resend";
+// Vercel Node runtime expects CommonJS for functions in this setup.
+const { Resend } = require("resend");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req: any, res: any): Promise<void> {
+module.exports = async function handler(req: any, res: any): Promise<void> {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
     return;
@@ -57,4 +58,4 @@ export default async function handler(req: any, res: any): Promise<void> {
     console.error(err);
     res.status(500).json({ error: "Server error." });
   }
-}
+};
