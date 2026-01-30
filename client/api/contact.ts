@@ -9,7 +9,7 @@ module.exports = async function handler(req: any, res: any): Promise<void> {
     return;
   }
 
-  const { name, phone, email } = req.body ?? {};
+  const { name, company, phone, email } = req.body ?? {};
 
   if (!name || !phone || !email) {
     res.status(400).json({ error: "Missing required fields." });
@@ -39,12 +39,17 @@ module.exports = async function handler(req: any, res: any): Promise<void> {
     "PureOrigins <onboarding@resend.dev>";
 
   try {
+    const subjectName = String(name).trim();
+    const subject = subjectName
+      ? `${subjectName} has requested a call back!`
+      : "New call back request";
+
     const { error } = await resend.emails.send({
       from,
       to,
-      subject: "PureOrigins contact request",
+      subject,
       reply_to: String(email),
-      text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}`,
+      text: `Name: ${name}\nCompany: ${company || "-"}\nPhone: ${phone}\nEmail: ${email}`,
     });
 
     if (error) {
