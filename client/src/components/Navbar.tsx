@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../assets/logo1.png";
+import logo from "../assets/PO-logo.png";
 
 export default function Navbar(): JSX.Element {
   const [open, setOpen] = useState(false);
