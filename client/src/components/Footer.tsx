@@ -1,4 +1,48 @@
+import { useState } from "react";
+
 export default function Footer(): JSX.Element {
+  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const name = form.name.trim();
+    const phone = form.phone.trim();
+    const email = form.email.trim();
+
+    if (!name || !phone || !email) {
+      setError("Please fill in your name, phone number, and email.");
+      return;
+    }
+
+    const emailValid = /\S+@\S+\.\S+/.test(email);
+    const phoneValid = phone.replace(/[^\d+]/g, "").length >= 7;
+
+    if (!emailValid) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!phoneValid) {
+      setError("Please enter a valid phone number.");
+      return;
+    }
+
+    setError(null);
+    const subject = encodeURIComponent("PureOrigins contact request");
+    const body = encodeURIComponent(
+      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}`
+    );
+
+    if (typeof window !== "undefined") {
+      window.location.href = `mailto:pureorigins@gmail.com?subject=${subject}&body=${body}`;
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="container footer__inner">
@@ -11,7 +55,7 @@ export default function Footer(): JSX.Element {
           <div className="footer__social" aria-label="Social media">
             <a
               className="footer__social-link"
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/in/daniel-mosaid-70467761/"
               target="_blank"
               rel="noreferrer"
               aria-label="PureOrigins on LinkedIn"
@@ -27,7 +71,7 @@ export default function Footer(): JSX.Element {
             </a>
             <a
               className="footer__social-link"
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/pureoriginsfresh/"
               target="_blank"
               rel="noreferrer"
               aria-label="PureOrigins on Instagram"
@@ -41,7 +85,7 @@ export default function Footer(): JSX.Element {
                 <path d="M7 3c-2.2 0-4 1.8-4 4v10c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V7c0-2.2-1.8-4-4-4H7zm10 2c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h10zm-5 3.5A4.5 4.5 0 1 0 16.5 13 4.5 4.5 0 0 0 12 8.5zm0 2A2.5 2.5 0 1 1 9.5 13 2.5 2.5 0 0 1 12 10.5zm4.75-3.75a.75.75 0 1 0 .75.75.75.75 0 0 0-.75-.75z" />
               </svg>
             </a>
-            <a
+            {/* <a
               className="footer__social-link"
               href="https://twitter.com"
               target="_blank"
@@ -56,12 +100,12 @@ export default function Footer(): JSX.Element {
               >
                 <path d="M18.36 3H21l-6.58 7.51L21.65 21H16l-4.02-5.26L7.28 21H3l6.83-7.78L3.35 3H9l3.63 4.81L18.36 3zm-1.8 15h1.49L8.42 5.97H6.8L16.56 18z" />
               </svg>
-            </a>
+            </a> */}
           </div>
         </div>
         <div className="footer__contact" id="contact">
           <span className="footer__mark">Contact</span>
-          <ul style={{ paddingTop: "10%"}}>
+          <ul style={{ paddingTop: "10%" }}>
             <li>
               <span className="footer__contact-icon" aria-hidden="true">
                 📍
@@ -78,7 +122,9 @@ export default function Footer(): JSX.Element {
               <span className="footer__contact-icon" aria-hidden="true">
                 ✉️
               </span>
-              <a href="mailto:pureorigins+sales@gmail.com">pureorigins@gmail.com</a>
+              <a href="mailto:pureorigins+sales@gmail.com">
+                pureorigins@gmail.com
+              </a>
             </li>
             <li>
               <span className="footer__contact-icon" aria-hidden="true">
@@ -92,11 +138,11 @@ export default function Footer(): JSX.Element {
           <div>
             <p className="footer__label">Get in touch now</p>
             <p style={{ color: "black", opacity: 0.8 }}>
-              Have a question or need a quote?
-              Fill out the form and we’ll get back to you quickly.
+              Have a question or need a quote? Fill out the form and we&apos;ll
+              get back to you quickly.
             </p>
           </div>
-          <form className="footer__form">
+          <form className="footer__form" onSubmit={handleSubmit}>
             <label className="sr-only" htmlFor="contact-name">
               Full name
             </label>
@@ -106,6 +152,8 @@ export default function Footer(): JSX.Element {
               name="name"
               placeholder="Your name"
               required
+              value={form.name}
+              onChange={handleChange}
             />
             <label className="sr-only" htmlFor="contact-phone">
               Phone number
@@ -116,6 +164,8 @@ export default function Footer(): JSX.Element {
               name="phone"
               placeholder="Phone number"
               required
+              value={form.phone}
+              onChange={handleChange}
             />
             <label className="sr-only" htmlFor="newsletter-email">
               Email address
@@ -126,7 +176,10 @@ export default function Footer(): JSX.Element {
               name="email"
               placeholder="Email address"
               required
+              value={form.email}
+              onChange={handleChange}
             />
+            {error ? <p className="form-error">{error}</p> : null}
             <button type="submit">Notify me</button>
           </form>
         </div>

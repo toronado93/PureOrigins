@@ -4,7 +4,7 @@ export default function About(): JSX.Element {
       <div className="about-card">
         <h3>Our Motto</h3>
         <p style={{ color: "black" }}>
-          "Bringing the world&apos;s finest fruit and vegetables from Egypt to
+          "Bringing the world&apos;s finest fruit, vegetables and more from Egypt, India and more to
           your doorstep."
         </p>
       </div>
