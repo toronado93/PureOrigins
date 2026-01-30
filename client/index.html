@@ -6,9 +6,134 @@
     <link rel="icon" href="/src/assets/PO-icon.png" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="/src/assets/PO-icon-dark-theme.png"  media="(prefers-color-scheme: dark)" />
   <title>Pure Origins — Your Suppliers of Fruit, Veg and more</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      .cookie-banner {
+        position: fixed;
+        inset: auto 1.5rem 1.5rem 1.5rem;
+        max-width: 720px;
+        padding: 1.25rem 1.5rem;
+        border-radius: 16px;
+        background: rgba(20, 20, 20, 0.95);
+        color: #f5f5f5;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        display: grid;
+        gap: 0.75rem;
+        z-index: 9999;
+        transform: translateY(120%);
+        opacity: 0;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+      }
+
+      .cookie-banner.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .cookie-banner h2 {
+        margin: 0;
+        font-size: 1.1rem;
+        letter-spacing: 0.01em;
+      }
+
+      .cookie-banner p {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #e1e1e1;
+      }
+
+      .cookie-banner a {
+        color: #f7c86a;
+        text-decoration: none;
+      }
+
+      .cookie-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .cookie-actions button {
+        border: none;
+        border-radius: 999px;
+        padding: 0.55rem 1.2rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .cookie-actions .accept {
+        background: #f7c86a;
+        color: #1a1a1a;
+        font-weight: 600;
+      }
+
+      .cookie-actions .decline {
+        background: transparent;
+        color: #f5f5f5;
+        border: 1px solid #6f6f6f;
+      }
+
+      @media (max-width: 640px) {
+        .cookie-banner {
+          inset: auto 1rem 1rem 1rem;
+          padding: 1rem;
+        }
+
+        .cookie-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+      <h2>We use cookies</h2>
+      <p>
+        Pure Origins uses essential cookies to keep our site working and optional analytics cookies to improve your experience.
+        You can accept or decline optional cookies at any time. Read our <a href="/privacy.html">privacy policy</a>.
+      </p>
+      <div class="cookie-actions">
+        <button class="accept" type="button" data-consent="accepted">Accept optional cookies</button>
+        <button class="decline" type="button" data-consent="declined">Decline optional cookies</button>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var storageKey = 'po_cookie_consent';
+        var banner = document.getElementById('cookie-banner');
+        if (!banner) {
+          return;
+        }
+
+        var existing = localStorage.getItem(storageKey);
+        if (!existing) {
+          requestAnimationFrame(function () {
+            banner.classList.add('is-visible');
+          });
+        }
+
+        banner.addEventListener('click', function (event) {
+          var target = event.target;
+          if (!(target instanceof HTMLElement)) {
+            return;
+          }
+
+          var consent = target.getAttribute('data-consent');
+          if (!consent) {
+            return;
+          }
+
+          localStorage.setItem(storageKey, consent);
+          banner.classList.remove('is-visible');
+        });
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
   </html>
