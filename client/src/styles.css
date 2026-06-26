@@ -66,6 +66,23 @@ p {
   background-position: center center;
 }
 
+.maintenance-page::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  height: clamp(4rem, 10dvh, 7rem);
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(252, 242, 226, 0),
+    rgba(254, 244, 230, 0.45) 58%,
+    #fef4e6
+  );
+}
+
 .maintenance-header {
   display: flex;
   align-items: center;
@@ -149,6 +166,16 @@ p {
   .maintenance-page::before {
     background-size: auto clamp(24rem, 50dvh, 29rem);
     background-position: 86% calc(100% - clamp(4.5rem, 9dvh, 5.4rem));
+  }
+
+  .maintenance-page::after {
+    height: clamp(8rem, 23dvh, 15rem);
+    background: linear-gradient(
+      180deg,
+      rgba(252, 242, 226, 0),
+      rgba(254, 244, 230, 0.72) 52%,
+      #fef4e6
+    );
   }
 
   .maintenance-hero {
