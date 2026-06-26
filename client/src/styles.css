@@ -1,6 +1,6 @@
 :root {
   --text: #26452a; /* Deep Green for typography */
-  --bg: #f5eee4; /* Off-White / Beige Background */
+  --bg: #fcf2e2; /* Grainy cream background sampled from maintenance artwork */
   --secondary: #1e3821; /* Optional Secondary Dark */
   --muted: #6b6b6b;
   --accent: #f3984f;
@@ -15,12 +15,7 @@ body {
   font-family: Inter, ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
   margin: 0;
   color: var(--text);
-  background: linear-gradient(
-    180deg,
-    rgba(245, 238, 228, 0.92),
-    #ffffff 35%,
-    rgba(255, 255, 255, 0.9)
-  );
+  background: var(--bg);
   line-height: 1.6;
 }
 .container {
@@ -43,6 +38,171 @@ p {
   color: rgba(38, 69, 42, 0.78);
 }
 
+.maintenance-page {
+  --maintenance-rail: clamp(1.5rem, 6.2vw, 5.85rem);
+  position: relative;
+  height: 100dvh;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: clamp(4.8rem, 12dvh, 7.25rem) 1fr clamp(
+      2rem,
+      5dvh,
+      3.2rem
+    );
+  color: var(--text);
+  background: var(--bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.maintenance-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("./assets/maintenance-background.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center center;
+}
+
+.maintenance-page::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  height: clamp(4rem, 10dvh, 7rem);
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(252, 242, 226, 0),
+    rgba(254, 244, 230, 0.45) 58%,
+    #fef4e6
+  );
+}
+
+.maintenance-header {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--maintenance-rail);
+  /* border-bottom: 1px solid rgba(30, 56, 33, 0.14); */
+}
+
+.maintenance-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.55rem, 1vw, 0.95rem);
+  color: var(--secondary);
+}
+
+.maintenance-brand img {
+  width: clamp(2.65rem, min(4.9vw, 9dvh), 4.4rem);
+  height: clamp(2.65rem, min(4.9vw, 9dvh), 4.4rem);
+  object-fit: contain;
+  filter: drop-shadow(0 0.65rem 1.4rem rgba(30, 56, 33, 0.14));
+}
+
+.maintenance-brand span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, min(3.1vw, 5.6dvh), 2.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.maintenance-hero {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--maintenance-rail);
+}
+
+.maintenance-copy {
+  width: min(45vw, 43rem);
+  transform: translateY(clamp(-2.2rem, -5dvh, -0.5rem));
+}
+
+.maintenance-copy h1 {
+  max-width: 41rem;
+  margin: 0;
+  color: var(--secondary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.9rem, min(6.1vw, 11dvh), 5.9rem);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.maintenance-copy p {
+  max-width: 27rem;
+  margin: clamp(0.85rem, 2.2dvh, 1.55rem) 0 0;
+  color: rgba(38, 69, 42, 0.86);
+  font-size: clamp(0.95rem, min(1.55vw, 2.75dvh), 1.28rem);
+  line-height: 1.65;
+}
+
+.maintenance-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 var(--maintenance-rail);
+  /* border-top: 1px solid rgba(47, 82, 51, 0.1); */
+  color: rgba(38, 69, 42, 0.62);
+  font-size: clamp(0.72rem, 1.35dvh, 0.95rem);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .maintenance-page {
+    --maintenance-rail: clamp(1rem, 5vw, 1.65rem);
+    grid-template-rows: clamp(4.2rem, 10dvh, 5.2rem) 1fr clamp(
+        2rem,
+        5dvh,
+        2.7rem
+      );
+  }
+
+  .maintenance-page::before {
+    background-size: auto clamp(24rem, 50dvh, 29rem);
+    background-position: 86% calc(100% - clamp(4.5rem, 9dvh, 5.4rem));
+  }
+
+  .maintenance-page::after {
+    height: clamp(8rem, 23dvh, 15rem);
+    background: linear-gradient(
+      180deg,
+      rgba(252, 242, 226, 0),
+      rgba(254, 244, 230, 0.72) 52%,
+      #fef4e6
+    );
+  }
+
+  .maintenance-hero {
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: clamp(1.4rem, 6dvh, 4rem);
+    text-align: center;
+  }
+
+  .maintenance-copy {
+    width: min(100%, 24rem);
+    transform: none;
+  }
+
+  .maintenance-copy h1 {
+    font-size: clamp(2.45rem, 12vw, 3.35rem);
+    line-height: 1.02;
+  }
+
+  .maintenance-copy p {
+    max-width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(0.9rem, 4vw, 1rem);
+    line-height: 1.55;
+  }
+}
 section,
 #sourcing,
 #sustainability,
@@ -86,7 +246,7 @@ a:hover {
     max-width: 110px !important;
   }
 }
-/* 
+/*
 .logo {
   height: 138px;
   max-width: 140px;
@@ -101,7 +261,9 @@ a:hover {
   background: linear-gradient(160deg, #ffffff, rgba(243, 152, 79, 0.04));
   box-shadow: 0 16px 28px rgba(30, 56, 33, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
     border-color 0.25s ease;
 }
 .card:hover {
@@ -260,7 +422,9 @@ a:hover {
     no-repeat;
   border: 1px solid rgba(243, 152, 79, 0.18);
   box-shadow: 0 18px 36px rgba(30, 56, 33, 0.1);
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
     border-color 0.25s ease;
 }
 .pillar-card:hover {
@@ -357,7 +521,9 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.01em;
   box-shadow: 0 20px 32px rgba(47, 82, 51, 0.28);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   text-decoration: none;
 }
 .btn-accent:hover {
@@ -376,7 +542,10 @@ a:hover {
   color: #fff;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
   text-decoration: none;
 }
 .btn-outline-light:hover {
@@ -398,13 +567,10 @@ a:hover {
 .footer {
   margin-top: clamp(4rem, 10vw, 6rem);
   color: rgba(38, 69, 42, 0.82);
-  background: linear-gradient(
-      180deg,
-      rgba(47, 82, 51, 0.08),
-      rgba(245, 238, 228, 0.92)
-    ),
+  background:
+    linear-gradient(180deg, rgba(47, 82, 51, 0.08), rgba(245, 238, 228, 0.92)),
     linear-gradient(180deg, rgba(245, 238, 228, 0.6), #ffffff 90%);
-  border-top: 1px solid rgba(47, 82, 51, 0.12);
+  /* border-top: 1px solid rgba(47, 82, 51, 0.12); */
 }
 
 .footer__inner {
@@ -448,7 +614,10 @@ a:hover {
   border-radius: 12px;
   background: rgba(47, 82, 51, 0.08);
   border: 1px solid rgba(47, 82, 51, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
   color: inherit;
 }
 
@@ -533,7 +702,9 @@ a:hover {
   padding: 0.6rem 1rem;
   font: inherit;
   background: #fff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   max-height: 50px;
 }
 
@@ -558,7 +729,9 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.03em;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .footer__form button:hover {
@@ -567,7 +740,7 @@ a:hover {
 }
 
 .footer__bottom {
-  border-top: 1px solid rgba(47, 82, 51, 0.12);
+  /* border-top: 1px solid rgba(47, 82, 51, 0.12); */
   background: rgba(255, 255, 255, 0.7);
   padding: 1rem 0;
 }
@@ -689,7 +862,8 @@ a:hover {
   );
   backdrop-filter: blur(10px);
   /* border-bottom: 1px solid rgba(255, 255, 255, 0.42); */
-  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -700,7 +874,7 @@ a:hover {
   right: 0;
   background: rgba(245, 238, 228, 0.92);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.08); */
   box-shadow: 0 18px 38px rgba(30, 56, 33, 0.14);
 }
 .nav-container {
@@ -732,7 +906,8 @@ a:hover {
   display: block;
   object-fit: contain;
   transform-origin: left center;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     filter 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   transform: scale(1);
@@ -765,7 +940,10 @@ a:hover {
   border-radius: 999px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .nav-links li a:hover {
   background: var(--accent-soft);
@@ -936,7 +1114,8 @@ a:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 15% 15%,
       rgba(255, 255, 255, 0.6),
       transparent 55%
@@ -960,7 +1139,9 @@ a:hover {
   inset: 0;
   opacity: 0;
   transform: scale(1.025);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 .slide.active {
   opacity: 1;
@@ -1017,7 +1198,9 @@ a:hover {
   font-size: 1.4rem;
   display: grid;
   place-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   z-index: 3;
 }
 .prev {
@@ -1048,7 +1231,9 @@ a:hover {
   background: rgba(255, 255, 255, 0.5);
   border: 0;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 .dot:hover {
   transform: scale(1.15);
